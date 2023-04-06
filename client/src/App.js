@@ -7,6 +7,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { useContext } from "react";
 
 import Home from "./components/pages/Home";
 
@@ -35,11 +36,20 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const styles = {
+  body: {
+    backgroundImage: "linear-gradient(rgb(122, 196, 239),white",
+  },
+};
+
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-center align-center min-100-vh bg-primary">
+        <div
+          style={styles.body}
+          className="flex-column justify-center align-center min-100-vh"
+        >
           <Routes>
             <Route path="/" element={<Home />} />
 
