@@ -14,7 +14,7 @@ import SignUp from "./components/pages/Signup";
 import NotFound from "./components/pages/NotFound";
 import SignIn from "./components/pages/SignIn";
 import Footer from "./components/Footer";
-
+import NavBar from "./components/NavBar";
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -48,6 +48,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <NavBar />
         <div
           style={styles.body}
           className="flex-column justify-center align-center min-100-vh"

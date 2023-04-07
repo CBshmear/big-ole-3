@@ -7,7 +7,7 @@ import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 import "../styles/Header.css";
 import Header from "../Header";
 
-import "./Styles.css";
+import "../styles/Styles.css";
 const Home = () => {
   const [searchedCamps, setSearchedCamps] = useState([]);
 
