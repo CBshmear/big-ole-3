@@ -7,7 +7,7 @@ import "../components/styles/Footer.css";
 export default function Footer() {
   return (
     <footer className="footer">
-      <p>Copywrite 2023 Happy Camper</p>
+      <p>Copyright 2023 Happy Camper</p>
     </footer>
   );
 }
