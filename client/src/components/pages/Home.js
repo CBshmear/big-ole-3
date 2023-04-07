@@ -4,8 +4,8 @@ import { useState } from "react";
 import { searchNationalParks } from "../../utils/API";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
-import '../styles/Header.css';
-import Header from '../Header';
+import "../styles/Header.css";
+import Header from "../Header";
 
 import "./Styles.css";
 const Home = () => {
@@ -54,23 +54,27 @@ const Home = () => {
       height: "fit-content",
       width: "fit-content",
       borderRadius: 10,
+
       //background: "rgba(0,0,0,0.2)",
     },
   };
   return (
-   
     <div>
-     <Header></Header>
+      <Header></Header>
       <div className="search-button">
-        <Button className={Button} style={styles.button} onClick={() => tester()}>
+        <Button
+          className={Button}
+          style={styles.button}
+          onClick={() => tester()}
+        >
           Randomize Campgrounds
         </Button>
       </div>
       <Container>
-        <h2 className="pt-5">
+        <h2 style={styles.h2} className="pt-5">
           {searchedCamps.length
             ? `Viewing ${searchedCamps.length} results:`
-            : "Search for a campground to begin"}
+            : ""}
         </h2>
         <Row>
           {searchedCamps.map((camp) => {
@@ -114,7 +118,6 @@ const Home = () => {
         </Row>
       </Container>
     </div>
-  
   );
 };
 

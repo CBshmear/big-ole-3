@@ -2,16 +2,26 @@
 //COULD BE NAVBAR.JS OR HEADER/FOOTER.JS
 
 import React from "react";
-import { GiCampfire } from "react-icons/gi";
+import { TbTent } from "react-icons/tb";
 import "../components/styles/Header.css";
+
+const styles = {
+  h4: {
+    margin: 10,
+  },
+};
 
 function Header() {
   return (
     <div className="header">
       <header>
-        <GiCampfire />
-        <h1>Happy Camper</h1>
-        <h4>Find Your Happy Place</h4>
+        <h1>
+          Happy
+          <TbTent />
+          Camper
+        </h1>
+
+        <h4 style={styles.h4}>Find Your Happy Place</h4>
       </header>
     </div>
   );
