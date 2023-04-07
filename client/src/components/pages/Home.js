@@ -5,6 +5,7 @@ import { searchNationalParks } from "../../utils/API";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
 import '../styles/Header.css';
+import Header from '../Header';
 
 import "./Styles.css";
 const Home = () => {
@@ -59,10 +60,7 @@ const Home = () => {
   return (
    
     <div>
-      <div className="header">
-        <h1>HappyCamper </h1>
-        <h4>Find your happy place</h4>
-      </div>
+     <Header></Header>
       <div className="search-button">
         <Button className={Button} style={styles.button} onClick={() => tester()}>
           Randomize Campgrounds
