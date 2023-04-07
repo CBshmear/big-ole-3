@@ -13,7 +13,7 @@ import Home from "./components/pages/Home";
 import SignUp from "./components/pages/Signup";
 import NotFound from "./components/pages/NotFound";
 import SignIn from "./components/pages/SignIn";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -60,7 +60,6 @@ function App() {
           </Routes>
           <Footer></Footer>
         </div>
-        
       </Router>
     </ApolloProvider>
   );

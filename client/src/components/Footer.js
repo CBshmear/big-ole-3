@@ -1,14 +1,13 @@
 // EXAMPLE COMPONENT FOR FILESTRUCTURE SAKE.
 //COULD BE NAVBAR.JS OR HEADER/FOOTER.JS
-import React from 'react';
+import React from "react";
 
-import '../components/styles/Footer.css'
+import "../components/styles/Footer.css";
 
 export default function Footer() {
-    return(
+  return (
     <footer className="footer">
-        <h1>Happy Camper</h1>
+      <p>Copyright 2023 Happy Camper</p>
     </footer>
-);
-};
-
+  );
+}
