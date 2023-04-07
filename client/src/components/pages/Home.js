@@ -4,6 +4,8 @@ import { useState } from "react";
 import { searchNationalParks } from "../../utils/API";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
+import '../styles/Header.css';
+
 import "./Styles.css";
 const Home = () => {
   const [searchedCamps, setSearchedCamps] = useState([]);
@@ -55,12 +57,17 @@ const Home = () => {
     },
   };
   return (
+   
     <div>
-      <h1>HappyCamper </h1>
-      <h4>Find your happy place</h4>
-      <Button className={Button} style={styles.button} onClick={() => tester()}>
-        Randomize Campgrounds
-      </Button>
+      <div className="header">
+        <h1>HappyCamper </h1>
+        <h4>Find your happy place</h4>
+      </div>
+      <div className="search-button">
+        <Button className={Button} style={styles.button} onClick={() => tester()}>
+          Randomize Campgrounds
+        </Button>
+      </div>
       <Container>
         <h2 className="pt-5">
           {searchedCamps.length
@@ -109,6 +116,7 @@ const Home = () => {
         </Row>
       </Container>
     </div>
+  
   );
 };
 
