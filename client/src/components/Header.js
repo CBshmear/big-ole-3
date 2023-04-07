@@ -12,7 +12,7 @@ function Header() {
         <div className="header">
             <header>
                 <h1>Happy Camper</h1>
-                <h3>Find Your Happy Place</h3>
+                <h4>Find Your Happy Place</h4>
             </header>
         </div>
     );
