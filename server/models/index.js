@@ -1,6 +1,4 @@
-//FOR REFERENCE
+const User = require('./User');
+// const Campground = require('./Campground');
 
-// const Tech = require('./Tech');
-// const Matchup = require('./Matchup');
-
-// module.exports = { Tech, Matchup };
+module.exports = { User };
