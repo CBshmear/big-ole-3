@@ -19,6 +19,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.16",
-    "react-bootstrap": "^2.7.2"
+    "react-bootstrap": "^2.7.2",
+    "react-icons": "^4.8.0"
   }
 }
