@@ -19,7 +19,9 @@ const typeDefs = gql `
         statePark: String 
         state: String 
         totalSites: Int 
-        amenities: [Amenities]!
+        toilets: String 
+        potableWater: String 
+        firewood: Boolean
 
     }  
 
@@ -33,14 +35,10 @@ const typeDefs = gql `
         statePark: String 
         state: String 
         totalSites: Int 
-        amenities: [Amenities]!
-
-    }
-
-    type Amenities { 
         toilets: String 
         potableWater: String 
         firewood: Boolean
+
     }
 
     type Query { 
@@ -50,7 +48,8 @@ const typeDefs = gql `
     type Mutation { 
         login(email: String, password: String): Auth 
         addUser(username: String!, email: String!, password: String!): Auth 
-        saveCampground()
+        saveCampground(campground: CampgroundInput): User 
+        removeCampground(campgroundId: String!): User
     } 
 
     type Auth { 
