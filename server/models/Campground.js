@@ -33,20 +33,15 @@ const campgroundSchema = new Schema({
         type: Number,
         required: true, 
     }, 
-    amenities: [ 
-        { 
-            toilets: { 
-                type: String,
-            }, 
-            potableWater: { 
-                type: String,
-            }, 
-            firewood: {
-                type: Boolean,
-            }
-        }
-
-    ]
+    toilets: { 
+        type: String,
+    }, 
+    potableWater: { 
+        type: String,
+    }, 
+    firewood: {
+        type: Boolean,
+    },
   
 });
 
