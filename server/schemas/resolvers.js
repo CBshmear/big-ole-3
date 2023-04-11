@@ -52,10 +52,10 @@ const resolvers = {
                 return newCampground;
             }
         }, 
-        removeBook: async (parent, args, context) => { 
+        removeCampground: async (parent, args, context) => { 
             if (context.user) { 
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: user._id },
+                    { _id: context.user._id },
                     { $pull: { favCampgrounds: { campgroundId: args.campgroundId } } },
                     { new: true }
                 );
