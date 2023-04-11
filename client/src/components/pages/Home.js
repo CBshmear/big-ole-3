@@ -8,6 +8,7 @@ import "../styles/Header.css";
 import Header from "../Header";
 
 import "../styles/Styles.css";
+//import campgroundSchema from "../../../../server/models/Campground";
 const Home = () => {
   const [searchedCamps, setSearchedCamps] = useState([]);
 
@@ -21,12 +22,17 @@ const Home = () => {
     const items = await response.json();
 
     const campData = items.data.map((camp) => ({
-      campId: camp.id,
-      campUrl: camp.url,
-      campName: camp.name,
-      campDescription: camp.description,
-      image: camp.images[0] || "",
-    }));
+      campgroundId: camp.id,
+      reservation: camp.url,
+      name: camp.name,
+      description: camp.description,
+      image: camp.images[0] || "", 
+      latlong: camp.latlong, 
+      firewood: camp.amenities.firewoodForSale, 
+      potablewater: camp.amenities.potableWater[0], 
+      toilets: campgroundSchema.amenities.toilets[0],
+      
+  }));
 
     console.log("campData", items.data);
 
@@ -79,22 +85,22 @@ const Home = () => {
         <Row>
           {searchedCamps.map((camp) => {
             return (
-              <Col md="4" key={camp.campId}>
-                <Card style={styles.card} key={camp.campId} border="dark">
+              <Col md="4" key={camp.campgroundId}>
+                <Card style={styles.card} key={camp.campgroundId} border="dark">
                   {camp.image.url ? (
                     <Card.Img
                       src={camp.image.url}
-                      alt={`The cover for ${camp.campName}`}
+                      alt={`The cover for ${camp.name}`}
                       variant="top"
                       style={styles.image}
                     />
                   ) : null}
                   <Card.Body>
                     <Card.Title style={styles.title}>
-                      {camp.campName}
+                      {camp.name}
                     </Card.Title>
 
-                    <Card.Text>{camp.campDescription}</Card.Text>
+                    <Card.Text>{camp.description}</Card.Text>
                     {/* {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some(

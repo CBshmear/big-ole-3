@@ -14,9 +14,7 @@ const typeDefs = gql `
         description: String! 
         image: String! 
         latlong: String 
-        reservation: String 
-        statePark: String 
-        state: String 
+        reservation: String  
         totalSites: Int 
         toilets: String 
         potableWater: String 
@@ -30,9 +28,7 @@ const typeDefs = gql `
         description: String! 
         image: String! 
         latlong: String 
-        reservation: String 
-        statePark: String 
-        state: String 
+        reservation: String  
         totalSites: Int 
         toilets: String 
         potableWater: String 

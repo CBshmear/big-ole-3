@@ -28,6 +28,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    
     addUser: async (parent, args) => {
       const user = await User.create(args);
 
@@ -39,29 +40,31 @@ const resolvers = {
 
 
             return { token, user };
-        },
-        saveCampground: async (parent, { campground }, context) => {
-            if (context.user) { 
-                const newCampground =  await User.findOneAndUpdate( 
-                    {_id: context.user._id}, 
-                    { $addToSet: {favCampgrounds: campground}},  
-                    {
-                        new: true,
-                        runValidators: true,
-                    }  
-                    );
-                return newCampground;
-            }
-        }, 
-        removeCampground: async (parent, args, context) => { 
-            if (context.user) { 
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $pull: { favCampgrounds: { campgroundId: args.campgroundId } } },
-                    { new: true }
-                );
-                return updatedUser;
-            }
+    },
+    
+    saveCampground: async (parent, { campground }, context) => {
+        if (context.user) { 
+            const newCampground =  await User.findOneAndUpdate( 
+                {_id: context.user._id}, 
+                { $addToSet: {favCampgrounds: campground}},  
+                {
+                    new: true,
+                    runValidators: true,
+                }  
+            );
+            return newCampground;
+        }
+    }, 
+    
+    removeCampground: async (parent, args, context) => { 
+        if (context.user) { 
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { favCampgrounds: { campgroundId: args.campgroundId } } },
+                { new: true }
+            );
+            return updatedUser;
+        }
 
     },
   },

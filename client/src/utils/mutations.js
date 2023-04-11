@@ -41,8 +41,6 @@ export const SAVE_CAMPGROUND = gql `
                 name
                 potableWater
                 reservation
-                state
-                statePark
                 toilets
                 totalSites
             } 
@@ -66,8 +64,6 @@ export const REMOVE_CAMPGROUND = gql `
                 name
                 potableWater
                 reservation
-                state
-                statePark
                 toilets
                 totalSites
             }
