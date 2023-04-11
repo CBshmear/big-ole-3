@@ -15,6 +15,7 @@ import NotFound from "./components/pages/NotFound";
 import SignIn from "./components/pages/SignIn";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import Profile from "./components/pages/Profile";
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -57,6 +58,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/profile" elemnt={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer></Footer>

@@ -14,8 +14,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../../utils/mutations"; 
-import Auth from '../../utils/auth';
+import { ADD_USER } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 function Copyright(props) {
   return (
@@ -35,15 +35,12 @@ function Copyright(props) {
   );
 }
 
-
-
-
 const theme = createTheme();
 
 export default function SignUp() {
+  const [addUser, { error }] = useMutation(ADD_USER);
   const handleSubmit = (event) => {
     event.preventDefault();
-    //const [addUser, { error }] = useMutation(ADD_USER);
 
     const data = new FormData(event.currentTarget);
     console.log({
