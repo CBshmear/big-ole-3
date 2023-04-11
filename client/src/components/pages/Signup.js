@@ -13,11 +13,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Auth from "../../utils/auth";
+import { useMutation } from "@apollo/client";
+
 const theme = createTheme();
 
 export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
+    //const [addUser, { error }] = useMutation(ADD_USER);
+
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
