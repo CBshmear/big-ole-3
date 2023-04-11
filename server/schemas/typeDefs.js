@@ -4,8 +4,7 @@ const typeDefs = gql `
     type User { 
         _id: ID! 
         username: String! 
-        email: String! 
-        password: String! 
+        email: String!  
         favCampgrounds: [Campground]
     } 
 
@@ -49,7 +48,7 @@ const typeDefs = gql `
         login(email: String, password: String): Auth 
         addUser(username: String!, email: String!, password: String!): Auth 
         saveCampground(campground: CampgroundInput): User 
-        removeCampground(campgroundId: String!): User
+        removeCampground(campgroundId: ID!): User
     } 
 
     type Auth { 
