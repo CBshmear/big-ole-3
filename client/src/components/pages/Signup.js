@@ -38,11 +38,12 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const [addUser, { error }] = useMutation(ADD_USER);
+  //const [addUser, { error }] = useMutation(ADD_USER);
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+
     console.log({
       email: data.get("email"),
       password: data.get("password"),
