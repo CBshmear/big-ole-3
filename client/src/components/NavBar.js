@@ -30,14 +30,14 @@ export default function ButtonAppBar() {
             {/* <MenuIcon /> */}
           </IconButton>
 
-          <Button href="/" color="inherit">
-            Home
+          <Button color="inherit">
+            <Link to="/">Home</Link>
           </Button>
-          <Button href="/signin" color="inherit">
-            Login
+          <Button color="inherit">
+            <Link to="/signin">Login</Link>
           </Button>
-          <Button href="/profile" color="inherit">
-            Profile
+          <Button color="inherit">
+            <Link to="/profile">Profile</Link>
           </Button>
         </Toolbar>
       </AppBar>
