@@ -21,6 +21,7 @@ description goes here
 install it duh
 
 ## Usage
+Link to deployed application: https://happy-camper12345.herokuapp.com/ 
 
 use it duh
 
