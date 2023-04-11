@@ -20,14 +20,6 @@ const campgroundSchema = new Schema({
     }, 
     reservation: { 
         type: String
-    },
-    statePark: { 
-        type: String, 
-        required: true,
-    }, 
-    state: {
-        type: String, 
-        required: true,
     }, 
     totalSites: { 
         type: Number,
