@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
-import { searchNationalParks } from "../../utils/API";
+import { searchNationalParks, searchNationalParksStateCode } from "../../utils/API";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
 import "../styles/Header.css";
@@ -11,9 +11,9 @@ import "../styles/Styles.css";
 //import campgroundSchema from "../../../../server/models/Campground";
 
 const Home = () => {
-  const [searchedCamps, setSearchedCamps] = useState([]);
+  const [searchedCamps, setSearchedCamps] = useState([]); //
 
-  const tester = async () => {
+  const tester = async () => { //randomize, may eventually become a search for all parks. in API call, it is limited to 20. will eventually be increased.
     const response = await searchNationalParks();
 
     if (!response.ok) {
@@ -39,6 +39,43 @@ const Home = () => {
 
     setSearchedCamps(campData);
   };
+
+  //search by State code (MN, IA... etc)
+  const [selectedOption, setSelectedOption] = useState('MN'); //initialize selected option
+
+  const handleOptionChange = (event) => { //track the selected option
+    console.log("handled option change to: " + event.target.value);
+    setSelectedOption(event.target.value);
+  };
+
+  const handleFetchData = async () => { //use the selection option in the API call
+
+    const response = await searchNationalParksStateCode(selectedOption); //API call is an imported function
+    
+    const items = await response.json();
+
+    if (!response.ok) {
+      throw new Error("something went wrong!");
+    }
+      console.log(items);
+
+      const campData = items.data.map((camp) => ({
+        campgroundId: camp.id,
+        reservation: camp.url,
+        name: camp.name,
+        description: camp.description,
+        image: camp.images[0] || "", 
+        latlong: camp.latlong, 
+        firewood: camp.amenities.firewoodForSale, 
+        potablewater: camp.amenities.potableWater[0], 
+        toilets: camp.amenities.toilets[0],
+        
+    }));
+
+      setSearchedCamps(campData);
+  };
+
+
 
   const styles = {
     image: {
@@ -76,6 +113,16 @@ const Home = () => {
         >
           Randomize Campgrounds
         </Button>
+          <div>
+            <h3>Search By State</h3>
+            <select value={selectedOption} onChange={handleOptionChange}>
+              <option value="MN">MN</option>
+              <option value="NY">NY</option>
+              <option value="IA">IA</option>
+              <option value="WI">WI</option>
+            </select>
+              <Button onClick={handleFetchData}>Search</Button>
+          </div>
       </div>
       <Container>
         <h2 style={styles.h2} className="pt-5">
