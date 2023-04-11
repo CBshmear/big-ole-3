@@ -32,6 +32,7 @@ When you click on the link above you will be taken to our home page where you ca
 Once there you have the ability to create a profile page and login.  Once logged in you can then search for and add National Parks to your Favorite list - you'll be able to use this list to help plan any future camping trips.  If you decide that this park isn't for you, you'll also have the ability to delete the park from your Favorite List.
 
 ## Usage
+Link to deployed application: https://happy-camper12345.herokuapp.com/ 
 
 Provide instructions and examples for use. Include screenshots as needed.
 
