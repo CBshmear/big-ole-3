@@ -9,6 +9,7 @@ import Header from "../Header";
 
 import "../styles/Styles.css";
 //import campgroundSchema from "../../../../server/models/Campground";
+
 const Home = () => {
   const [searchedCamps, setSearchedCamps] = useState([]);
 
@@ -30,7 +31,7 @@ const Home = () => {
       latlong: camp.latlong, 
       firewood: camp.amenities.firewoodForSale, 
       potablewater: camp.amenities.potableWater[0], 
-      toilets: campgroundSchema.amenities.toilets[0],
+      toilets: camp.amenities.toilets[0],
       
   }));
 
