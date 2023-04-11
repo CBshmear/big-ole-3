@@ -19,7 +19,6 @@ const typeDefs = gql `
         toilets: String 
         potableWater: String 
         firewood: Boolean
-
     }  
 
     input CampgroundInput { 
