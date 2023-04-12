@@ -151,7 +151,6 @@ const Home = () => {
             <option value="OH">OH</option>
             <option value="OK">OK</option>
             <option value="OR">OR</option>
-
             <option value="WI">WI</option>
           </select>
           <Button style={styles.button} onClick={handleFetchData}>
