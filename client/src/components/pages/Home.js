@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import {
   searchNationalParks,
@@ -10,13 +10,13 @@ import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 import "../styles/Header.css";
 import Header from "../Header";
 import Auth from "../../utils/auth";
-
+import { SAVE_CAMPGROUND } from "../../utils/mutations";
 import "../styles/Styles.css";
 //import campgroundSchema from "../../../../server/models/Campground";
 
 const Home = () => {
   const [searchedCamps, setSearchedCamps] = useState([]); //
-
+  const [saveCampground] = useMutation(SAVE_CAMPGROUND);
   const tester = async () => {
     //randomize, may eventually become a search for all parks. in API call, it is limited to 20. will eventually be increased.
     const response = await searchNationalParks();
@@ -79,6 +79,22 @@ const Home = () => {
 
     setSearchedCamps(campData);
   };
+
+  // const handleCampgroundSave = async () => {
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  //   if (!token) {
+  //     return false;
+  //   }
+  //   try {
+  //     const campToSave = searchedCamps.find((camp) => camp.id === campgroundId);
+  //     const { data } = await saveCampground({
+  //       variables: { campgroundInput: { ...campToSave } },
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const styles = {
     image: {
@@ -164,6 +180,7 @@ const Home = () => {
           <Button style={styles.button} onClick={handleFetchData}>
             Search
           </Button>
+          <h3>Go Exploring!</h3>
           <Button
             className={Button}
             style={styles.button}
