@@ -38,16 +38,29 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  //const [addUser, { error }] = useMutation(ADD_USER);
-  const handleSubmit = (event) => {
+  const [addUser, { error }] = useMutation(ADD_USER);
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const data = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget);
 
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    try {
+      const { data } = await addUser({
+        variables: {
+          username: formData.get("username"),
+          email: formData.get("email"),
+          password: formData.get("password"),
+        },
+      });
+      console.log({
+        username: formData.get("username"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+      });
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
