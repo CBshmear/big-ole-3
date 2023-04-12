@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
-import { searchNationalParks, searchNationalParksStateCode } from "../../utils/API";
+import {
+  searchNationalParks,
+  searchNationalParksStateCode,
+} from "../../utils/API";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
 import "../styles/Header.css";
@@ -13,7 +16,8 @@ import "../styles/Styles.css";
 const Home = () => {
   const [searchedCamps, setSearchedCamps] = useState([]); //
 
-  const tester = async () => { //randomize, may eventually become a search for all parks. in API call, it is limited to 20. will eventually be increased.
+  const tester = async () => {
+    //randomize, may eventually become a search for all parks. in API call, it is limited to 20. will eventually be increased.
     const response = await searchNationalParks();
 
     if (!response.ok) {
@@ -27,13 +31,12 @@ const Home = () => {
       reservation: camp.url,
       name: camp.name,
       description: camp.description,
-      image: camp.images[0] || "", 
-      latlong: camp.latlong, 
-      firewood: camp.amenities.firewoodForSale, 
-      potablewater: camp.amenities.potableWater[0], 
+      image: camp.images[0] || "",
+      latlong: camp.latlong,
+      firewood: camp.amenities.firewoodForSale,
+      potablewater: camp.amenities.potableWater[0],
       toilets: camp.amenities.toilets[0],
-      
-  }));
+    }));
 
     console.log("campData", items.data);
 
@@ -41,41 +44,40 @@ const Home = () => {
   };
 
   //search by State code (MN, IA... etc)
-  const [selectedOption, setSelectedOption] = useState('MN'); //initialize selected option
+  const [selectedOption, setSelectedOption] = useState("MN"); //initialize selected option
 
-  const handleOptionChange = (event) => { //track the selected option
+  const handleOptionChange = (event) => {
+    //track the selected option
     console.log("handled option change to: " + event.target.value);
     setSelectedOption(event.target.value);
   };
 
-  const handleFetchData = async () => { //use the selection option in the API call
+  const handleFetchData = async () => {
+    //use the selection option in the API call
 
     const response = await searchNationalParksStateCode(selectedOption); //API call is an imported function
-    
+
     const items = await response.json();
 
     if (!response.ok) {
       throw new Error("something went wrong!");
     }
-      console.log(items);
+    console.log(items);
 
-      const campData = items.data.map((camp) => ({
-        campgroundId: camp.id,
-        reservation: camp.url,
-        name: camp.name,
-        description: camp.description,
-        image: camp.images[0] || "", 
-        latlong: camp.latlong, 
-        firewood: camp.amenities.firewoodForSale, 
-        potablewater: camp.amenities.potableWater[0], 
-        toilets: camp.amenities.toilets[0],
-        
+    const campData = items.data.map((camp) => ({
+      campgroundId: camp.id,
+      reservation: camp.url,
+      name: camp.name,
+      description: camp.description,
+      image: camp.images[0] || "",
+      latlong: camp.latlong,
+      firewood: camp.amenities.firewoodForSale,
+      potablewater: camp.amenities.potableWater[0],
+      toilets: camp.amenities.toilets[0],
     }));
 
-      setSearchedCamps(campData);
+    setSearchedCamps(campData);
   };
-
-
 
   const styles = {
     image: {
@@ -98,6 +100,7 @@ const Home = () => {
       height: "fit-content",
       width: "fit-content",
       borderRadius: 10,
+      margin: 10,
 
       //background: "rgba(0,0,0,0.2)",
     },
@@ -106,23 +109,62 @@ const Home = () => {
     <div>
       <Header></Header>
       <div className="search-button">
-        <Button
-          className={Button}
-          style={styles.button}
-          onClick={() => tester()}
-        >
-          Randomize Campgrounds
-        </Button>
-          <div>
-            <h3>Search By State</h3>
-            <select value={selectedOption} onChange={handleOptionChange}>
-              <option value="MN">MN</option>
-              <option value="NY">NY</option>
-              <option value="IA">IA</option>
-              <option value="WI">WI</option>
-            </select>
-              <Button onClick={handleFetchData}>Search</Button>
-          </div>
+        <div>
+          <h3>Search By State</h3>
+          <select value={selectedOption} onChange={handleOptionChange}>
+            <option value="MN">MN</option>
+            <option value="NY">NY</option>
+            <option value="IA">IA</option>
+            <option value="AZ">AZ</option>
+            <option value="WA">WA</option>
+            <option value="NY">NY</option>
+            <option value="ME">ME</option>
+            <option value="ND">ND</option>
+            <option value="SD">SD</option>
+            <option value="AK">AK</option>
+            <option value="AR">AR</option>
+            <option value="CA">CA</option>
+            <option value="CT">CT</option>
+            <option value="CO">CO</option>
+            <option value="DE">DE</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="DE">DE</option>
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="KS">KS</option>
+            <option value="LA">LA</option>
+            <option value="MD">MD</option>
+            <option value="MA">MA</option>
+            <option value="MI">MI</option>
+            <option value="MS">MS</option>
+            <option value="MO">MO</option>
+            <option value="MT">MT</option>
+            <option value="NE">NE</option>
+            <option value="NV">NV</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>
+            <option value="NC">NC</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+
+            <option value="WI">WI</option>
+          </select>
+          <Button style={styles.button} onClick={handleFetchData}>
+            Search
+          </Button>
+          <Button
+            className={Button}
+            style={styles.button}
+            onClick={() => tester()}
+          >
+            Randomize Campgrounds
+          </Button>
+        </div>
       </div>
       <Container>
         <h2 style={styles.h2} className="pt-5">
@@ -144,9 +186,7 @@ const Home = () => {
                     />
                   ) : null}
                   <Card.Body>
-                    <Card.Title style={styles.title}>
-                      {camp.name}
-                    </Card.Title>
+                    <Card.Title style={styles.title}>{camp.name}</Card.Title>
 
                     <Card.Text>{camp.description}</Card.Text>
                     {/* {Auth.loggedIn() && (
