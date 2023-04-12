@@ -99,8 +99,8 @@ const Home = () => {
   const styles = {
     image: {
       display: "flex",
-      maxWidth: "60%",
-      height: "80px",
+      width: "60%",
+      height: "30%",
       margin: 5,
       borderRadius: 10,
     },
@@ -213,6 +213,16 @@ const Home = () => {
                     <Card.Title style={styles.title}>{camp.name}</Card.Title>
 
                     <Card.Text>{camp.description}</Card.Text>
+                    <Card.Text>{camp.toilets}</Card.Text>
+                    {camp.firewood ? (
+                      <Card.Text>Firewood on-site: {camp.firewood}</Card.Text>
+                    ) : null}
+                    {camp.reservation ? (
+                      <Button style={styles.button}>
+                        <Link to={camp.reservation}>Reserve a site!</Link>
+                      </Button>
+                    ) : null}
+
                     {Auth.loggedIn() ? (
                       <Button>Stick a pin in it!</Button>
                     ) : (

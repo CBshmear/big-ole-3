@@ -59,7 +59,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="campground/:campid" element={<SingleCampground />} />
+            {/* <Route path="campground/:campid" element={<SingleCampground />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer></Footer>
