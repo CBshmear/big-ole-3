@@ -9,6 +9,7 @@ import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
 import "../styles/Header.css";
 import Header from "../Header";
+import Auth from "../../utils/auth";
 
 import "../styles/Styles.css";
 //import campgroundSchema from "../../../../server/models/Campground";
@@ -104,6 +105,9 @@ const Home = () => {
 
       //background: "rgba(0,0,0,0.2)",
     },
+    select: {
+      width: "fit-content",
+    },
   };
   return (
     <div>
@@ -111,7 +115,11 @@ const Home = () => {
       <div className="search-button">
         <div>
           <h3>Search By State</h3>
-          <select value={selectedOption} onChange={handleOptionChange}>
+          <select
+            style={styles.select}
+            value={selectedOption}
+            onChange={handleOptionChange}
+          >
             <option value="MN">MN</option>
             <option value="NY">NY</option>
             <option value="IA">IA</option>
@@ -188,6 +196,11 @@ const Home = () => {
                     <Card.Title style={styles.title}>{camp.name}</Card.Title>
 
                     <Card.Text>{camp.description}</Card.Text>
+                    {Auth.loggedIn() ? (
+                      <Button>Stick a pin in it!</Button>
+                    ) : (
+                      <Button>Login to save a campground</Button>
+                    )}
                     {/* {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some(
