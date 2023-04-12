@@ -8,7 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { useContext } from "react";
-
+import SingleCampground from "./components/pages/SingleCampground";
 import Home from "./components/pages/Home";
 import SignUp from "./components/pages/Signup";
 import NotFound from "./components/pages/NotFound";
@@ -58,7 +58,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/profile" elemnt={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="campground/:campid" element={<SingleCampground />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer></Footer>

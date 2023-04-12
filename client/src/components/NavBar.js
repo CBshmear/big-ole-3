@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 //import MenuIcon from "@mui/icons-material/Menu";
-
+import Auth from "../utils/auth";
 const styles = {
   appBar: {
     backgroundColor: "rgb(122, 196, 239)",
@@ -33,12 +33,21 @@ export default function ButtonAppBar() {
           <Button color="inherit">
             <Link to="/">Home</Link>
           </Button>
-          <Button color="inherit">
-            <Link to="/signin">Login</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/profile">Profile</Link>
-          </Button>
+
+          {Auth.loggedIn() ? (
+            <>
+              <Button color="inherit">
+                <Link to="/profile">Profile</Link>
+              </Button>
+              <Button onClick={Auth.logout} color="inherit">
+                <Link> Log-out </Link>
+              </Button>
+            </>
+          ) : (
+            <Button color="inherit">
+              <Link to="/signin">Login</Link>
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
