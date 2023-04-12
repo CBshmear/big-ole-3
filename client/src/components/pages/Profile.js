@@ -23,8 +23,8 @@ export default function Profile() {
         if (!token) {
           return false;
         }
-
-        const response = await getMe(token);
+        console.log(userData);
+        const response = await getMe();
 
         if (!response.ok) {
           throw new Error("something went wrong!");
@@ -46,8 +46,8 @@ export default function Profile() {
       <h1>Hello, {userData.username}!</h1>
 
       <div id="campgrounds">
-        <h1>Favorite Campgrounds</h1>
-        {userData.favCamgrounds.map((camp) => {
+        <h3>Favorite Campgrounds</h3>
+        {/* {userData.favCamgrounds.map((camp) => {
           return (
             <div>
               <h1>{camp.name}</h1>
@@ -56,7 +56,7 @@ export default function Profile() {
               <img src={camp.image}></img>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );
