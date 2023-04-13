@@ -5,8 +5,9 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
+      console.log("context", context.user);
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return await User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -26,9 +27,10 @@ const resolvers = {
       }
 
       const token = signToken(user);
+      console.log("token", token);
       return { token, user };
     },
-    
+
     addUser: async (parent, args) => {
       const user = await User.create(args);
 
@@ -38,34 +40,34 @@ const resolvers = {
 
       const token = signToken(user);
 
-
-            return { token, user };
+      return { token, user };
     },
-    
-    saveCampground: async (parent, { campground }, context) => {
-        if (context.user) { 
-            const newCampground =  await User.findOneAndUpdate( 
-                {_id: context.user._id}, 
-                { $addToSet: {favCampgrounds: campground}},  
-                {
-                    new: true,
-                    runValidators: true,
-                }  
-            );
-            return newCampground;
-        }
-    }, 
-    
-    removeCampground: async (parent, args, context) => { 
-        if (context.user) { 
-            const updatedUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $pull: { favCampgrounds: { campgroundId: args.campgroundId } } },
-                { new: true }
-            );
-            return updatedUser;
-        }
 
+    saveCampground: async (parent, { campground }, context) => {
+      console.log("context", context.user);
+
+      if (context.user) {
+        const newCampground = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { favCampgrounds: campground } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        return newCampground;
+      }
+    },
+
+    removeCampground: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { favCampgrounds: { campgroundId: args.campgroundId } } },
+          { new: true }
+        );
+        return updatedUser;
+      }
     },
   },
 };
