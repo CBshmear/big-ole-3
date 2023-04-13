@@ -4,7 +4,9 @@ import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../styles/Profile.css";
 import { GET_ME } from "../../utils/queries";
+import { REMOVE_CAMPGROUND } from "../../utils/mutations";
 import Auth from "../../utils/auth";
+import { removeCampId } from "../../utils/localStorage";
 
 const styles = {
   image: {
@@ -18,7 +20,7 @@ const styles = {
     borderRadius: 10,
     justifyContent: "center",
     background: "rgba(0,0,0,0.2)",
-    backgroundImage: "url(",
+    margin: 20,
   },
   title: {
     fontSize: "25px",
@@ -34,6 +36,10 @@ const styles = {
   select: {
     width: "fit-content",
   },
+  body: {
+    display: "flex",
+    justifyContent: "center",
+  },
 };
 //wishlist:
 //user profile has a campground wishlist and a places i've been
@@ -46,15 +52,40 @@ export default function Profile() {
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
   console.log(userData);
+  const [removeCampground] = useMutation(REMOVE_CAMPGROUND);
+
+  const handleDeleteCamp = async (campgroundId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    console.log(campgroundId);
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const { data } = await removeCampground({
+        variables: { campgroundId: campgroundId },
+      });
+
+      if (!data) {
+        throw new Error("something went wrong!");
+      }
+
+      // upon success, remove book's id from localStorage
+      removeCampId(campgroundId);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   if (loading) {
     return <h2>LOADING...</h2>;
   }
   return (
     <div>
-      <h1>Profile Page</h1>
-      <h1>Hello, {userData.username}</h1>
-      {userData.favCampgrounds ? <h4>Favorited campgrounds</h4> : null}
+      <h1 style={styles.body}>Hello, {userData.username}</h1>
+      {userData.favCampgrounds ? (
+        <h4 style={styles.body}>Favorite Campgrounds</h4>
+      ) : null}
 
       <Row>
         {userData.favCampgrounds.map((camp) => {
@@ -82,26 +113,15 @@ export default function Profile() {
                       <Link to={camp.reservation}>Reserve a site!</Link>
                     </Button>
                   ) : null}
+                  <Button onClick={() => handleDeleteCamp(camp.campgroundId)}>
+                    Delete Campground
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>
           );
         })}
       </Row>
-
-      {/* <div id="campgrounds">
-        <h3>Favorite Campgrounds</h3>
-        {userData.favCampgrounds.map((camp) => {
-          return (
-            <div>
-              <h1>{camp.name}</h1>
-              <h1>{camp.state}</h1>
-              <h1>{camp.description}</h1>
-              <img src={camp.image}></img>
-            </div>
-          );
-        })}
-      </div> */}
     </div>
   );
 }
