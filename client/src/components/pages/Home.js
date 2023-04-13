@@ -32,10 +32,10 @@ const Home = () => {
       reservation: camp.url,
       name: camp.name,
       description: camp.description,
-      image: camp.images[0] || "",
+      image: camp.images[0]?.url || "",
       latlong: camp.latlong,
       firewood: camp.amenities.firewoodForSale,
-      potablewater: camp.amenities.potableWater[0],
+      potableWater: camp.amenities.potableWater[0],
       toilets: camp.amenities.toilets[0],
     }));
 
@@ -70,10 +70,10 @@ const Home = () => {
       reservation: camp.url,
       name: camp.name,
       description: camp.description,
-      image: camp.images[0] || "",
+      image: camp.images[0]?.url || "",
       latlong: camp.latlong,
       firewood: camp.amenities.firewoodForSale,
-      potablewater: camp.amenities.potableWater[0],
+      potableWater: camp.amenities.potableWater[0],
       toilets: camp.amenities.toilets[0],
     }));
 
@@ -88,14 +88,18 @@ const Home = () => {
       return false;
     }
     try {
-      const campToSave = searchedCamps.find(
+      const newCamp = searchedCamps.find(
         (camp) => camp.campgroundId === campgroundId
       );
-      console.log("camptosave", campToSave);
+      console.log("camptosave", { ...newCamp });
+
       const { data } = await saveCampground({
-        variables: { campgroundInput: { ...campToSave } },
+        variables: {
+          campground: { ...newCamp },
+        },
       });
       console.log(data);
+      // set some state variable
     } catch (err) {
       console.error(err);
     }
@@ -206,9 +210,9 @@ const Home = () => {
             return (
               <Col md="4" key={camp.campgroundId}>
                 <Card style={styles.card} key={camp.campgroundId} border="dark">
-                  {camp.image.url ? (
+                  {camp.image ? (
                     <Card.Img
-                      src={camp.image.url}
+                      src={camp.image}
                       alt={`The cover for ${camp.name}`}
                       variant="top"
                       style={styles.image}

@@ -1,7 +1,7 @@
-import { gql } from '@apollo/client'; 
+import { gql } from "@apollo/client";
 
-export const LOGIN_USER = gql` 
-    mutation login($email: String!, $password: String!) {
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
       user {
@@ -11,11 +11,10 @@ export const LOGIN_USER = gql`
       }
     }
   }
-
-`; 
+`;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String! $email: String!, $password: String!) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
       token
       user {
@@ -24,50 +23,48 @@ export const ADD_USER = gql`
       }
     }
   }
-`; 
+`;
 
-export const SAVE_CAMPGROUND = gql `
-    mutation saveCampground($campground: CampgroundInput) { 
-        saveCampground(campground: $campground) { 
-            _id
-            username
-            email
-            favCampgrounds {
-                campgroundId
-                description
-                firewood
-                image
-                latlong
-                name
-                potableWater
-                reservation
-                toilets
-                totalSites
-            } 
-        }
+export const SAVE_CAMPGROUND = gql`
+  mutation saveCampground($campground: CampgroundInput) {
+    saveCampground(campgroundInput: $campground) {
+      _id
+      username
+      email
+      favCampgrounds {
+        campgroundId
+        description
+        firewood
+        image
+        latlong
+        name
+        potableWater
+        reservation
+        toilets
+        totalSites
+      }
     }
+  }
+`;
 
-` 
-
-export const REMOVE_CAMPGROUND = gql `
-    mutation RemoveCampground($campgroundId: ID!) {
-        removeCampground(campgroundId: $campgroundId) {
-            _id
-            username
-            email
-            favCampgrounds {
-                campgroundId
-                description
-                firewood
-                image
-                latlong
-                name
-                potableWater
-                reservation
-                toilets
-                totalSites
-            }
+export const REMOVE_CAMPGROUND = gql`
+  mutation RemoveCampground($campgroundId: ID!) {
+    removeCampground(campgroundId: $campgroundId) {
+      _id
+      username
+      email
+      favCampgrounds {
+        campgroundId
+        description
+        firewood
+        image
+        latlong
+        name
+        potableWater
+        reservation
+        toilets
+        totalSites
+      }
     }
-    }
-
-`
+  }
+`;
