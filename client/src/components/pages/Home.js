@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   searchNationalParks,
   searchNationalParksStateCode,
 } from "../../utils/API";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
-
+import { saveCampIds, getSavedCampIds } from "../../utils/localStorage";
 import "../styles/Header.css";
 import Header from "../Header";
 import Auth from "../../utils/auth";
@@ -17,6 +17,12 @@ import "../styles/Styles.css";
 const Home = () => {
   const [searchedCamps, setSearchedCamps] = useState([]); //
   const [saveCampground] = useMutation(SAVE_CAMPGROUND);
+  const [savedCampIds, setSavedCampIds] = useState(getSavedCampIds());
+
+  useEffect(() => {
+    return () => saveCampIds(savedCampIds);
+  });
+
   const tester = async () => {
     //randomize, may eventually become a search for all parks. in API call, it is limited to 20. will eventually be increased.
     const response = await searchNationalParks();
@@ -98,6 +104,8 @@ const Home = () => {
           campground: { ...newCamp },
         },
       });
+      setSavedCampIds([...savedCampIds, newCamp.campgroundId]);
+
       console.log(data);
       // set some state variable
     } catch (err) {
@@ -232,15 +240,18 @@ const Home = () => {
                       </Button>
                     ) : null}
 
-                    {Auth.loggedIn() ? (
+                    {Auth.loggedIn() && (
                       <Button
+                        disabled={savedCampIds?.some(
+                          (savedCampId) => savedCampId === camp.campgroundId
+                        )}
                         onClick={() => handleCampgroundSave(camp.campgroundId)}
                       >
-                        Stick a pin in it!
-                      </Button>
-                    ) : (
-                      <Button>
-                        <Link to="/signin"> Login to save a campground </Link>
+                        {savedCampIds?.some(
+                          (savedCampId) => savedCampId === camp.campgroundId
+                        )
+                          ? "This campground has already been saved!"
+                          : "Save this Campground!"}
                       </Button>
                     )}
                     {/* {Auth.loggedIn() && (
