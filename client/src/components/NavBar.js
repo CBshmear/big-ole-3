@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
+import { TbTent } from "react-icons/tb";
+
 //import MenuIcon from "@mui/icons-material/Menu";
 import Auth from "../utils/auth";
 const styles = {
@@ -29,6 +31,8 @@ export default function ButtonAppBar() {
           >
             {/* <MenuIcon /> */}
           </IconButton>
+
+          <TbTent />
 
           <Button color="inherit">
             <Link to="/">Home</Link>
