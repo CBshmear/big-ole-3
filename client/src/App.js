@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "react-scroll-to-top";
 import {
   ApolloClient,
   InMemoryCache,
@@ -49,6 +50,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <ScrollToTop />
         <NavBar />
         <div
           style={styles.body}

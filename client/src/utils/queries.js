@@ -32,6 +32,11 @@ export const GET_ME = gql`
         campgroundId
         image
         name
+        potableWater
+        reservation
+        toilets
+        firewood
+        latlong
       }
     }
   }

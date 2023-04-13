@@ -40,7 +40,7 @@ export default function ButtonAppBar() {
                 <Link to="/profile">Profile</Link>
               </Button>
               <Button onClick={Auth.logout} color="inherit">
-                <Link> Log-out </Link>
+                <Link to="/"> Log-out </Link>
               </Button>
             </>
           ) : (
