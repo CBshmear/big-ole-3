@@ -43,13 +43,13 @@ const resolvers = {
       return { token, user };
     },
 
-    saveCampground: async (parent, { campground }, context) => {
+    saveCampground: async (parent, args, context) => {
       console.log("context", context.user);
-
+      console.log("!!!!", args);
       if (context.user) {
         const newCampground = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { favCampgrounds: campground } },
+          { $addToSet: { favCampgrounds: args.campgroundInput } },
           {
             new: true,
             runValidators: true,

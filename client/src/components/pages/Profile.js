@@ -49,7 +49,7 @@ export default function Profile() {
 
       <div id="campgrounds">
         <h3>Favorite Campgrounds</h3>
-        {/* {userData.favCamgrounds.map((camp) => {
+        {userData.favCampgrounds.map((camp) => {
           return (
             <div>
               <h1>{camp.name}</h1>
@@ -58,7 +58,7 @@ export default function Profile() {
               <img src={camp.image}></img>
             </div>
           );
-        })} */}
+        })}
       </div>
     </div>
   );

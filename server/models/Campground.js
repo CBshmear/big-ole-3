@@ -1,6 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const campgroundSchema = new Schema({
+  campgroundId: {
+    type: String,
+  },
   name: {
     type: String,
     required: true,
@@ -22,7 +25,6 @@ const campgroundSchema = new Schema({
   },
   totalSites: {
     type: Number,
-    required: true,
   },
   toilets: {
     type: String,
@@ -31,7 +33,7 @@ const campgroundSchema = new Schema({
     type: String,
   },
   firewood: {
-    type: Boolean,
+    type: String,
   },
 });
 
