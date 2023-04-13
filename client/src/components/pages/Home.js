@@ -80,21 +80,26 @@ const Home = () => {
     setSearchedCamps(campData);
   };
 
-  // const handleCampgroundSave = async () => {
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //   if (!token) {
-  //     return false;
-  //   }
-  //   try {
-  //     const campToSave = searchedCamps.find((camp) => camp.id === campgroundId);
-  //     const { data } = await saveCampground({
-  //       variables: { campgroundInput: { ...campToSave } },
-  //     });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const handleCampgroundSave = async (campgroundId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // console.log(campgroundId);
+    // console.log("HERE!!", searchedCamps);
+    if (!token) {
+      return false;
+    }
+    try {
+      const campToSave = searchedCamps.find(
+        (camp) => camp.campgroundId === campgroundId
+      );
+      console.log("camptosave", campToSave);
+      const { data } = await saveCampground({
+        variables: { campgroundInput: { ...campToSave } },
+      });
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const styles = {
     image: {
@@ -224,9 +229,15 @@ const Home = () => {
                     ) : null}
 
                     {Auth.loggedIn() ? (
-                      <Button>Stick a pin in it!</Button>
+                      <Button
+                        onClick={() => handleCampgroundSave(camp.campgroundId)}
+                      >
+                        Stick a pin in it!
+                      </Button>
                     ) : (
-                      <Button>Login to save a campground</Button>
+                      <Button>
+                        <Link to="/signin"> Login to save a campground </Link>
+                      </Button>
                     )}
                     {/* {Auth.loggedIn() && (
                       <Button

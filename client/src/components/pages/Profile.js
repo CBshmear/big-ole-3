@@ -13,32 +13,34 @@ import Auth from "../../utils/auth";
 //delete campground
 
 export default function Profile() {
-  const [userData, setUserData] = useState({});
-  const getMe = useQuery(GET_ME);
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //const [userData, setUserData] = useState({});
+  const { loading, data } = useQuery(GET_ME);
+  const userData = data?.me || {};
+  console.log(userData);
+  // useEffect(() => {
+  //   const getUserData = async () => {
+  //     try {
+  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        if (!token) {
-          return false;
-        }
-        console.log(userData);
-        const response = await getMe();
+  //       if (!token) {
+  //         return false;
+  //       }
+  //       const response = await getMe();
 
-        if (!response.ok) {
-          throw new Error("something went wrong!");
-        }
+  //       if (!response.ok) {
+  //         throw new Error("something went wrong!");
+  //       }
 
-        const user = await response.json();
-        setUserData(user); //sets the state variable to the returned info
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  //       const user = await response.json();
+  //       //setUserData(user); //sets the state variable to the returned info
+  //       console.log(userData);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
 
-    getUserData();
-  }, []); //Runs only on the first render
+  //   getUserData();
+  // }, []); //Runs only on the first render
 
   return (
     <div>
