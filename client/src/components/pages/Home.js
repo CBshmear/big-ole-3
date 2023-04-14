@@ -120,6 +120,7 @@ const Home = () => {
       height: "30%",
       margin: 5,
       borderRadius: 10,
+      border: "solid 1px black",
     },
     card: {
       borderRadius: 10,
@@ -127,9 +128,7 @@ const Home = () => {
       background: "rgba(0,0,0,0.2)",
       backgroundImage: "url(",
     },
-    title: {
-      fontSize: "25px",
-    },
+
     button: {
       height: "fit-content",
       width: "fit-content",
@@ -140,6 +139,13 @@ const Home = () => {
     },
     select: {
       width: "fit-content",
+    },
+    description: {
+      fontWeight: 500,
+    },
+    title: {
+      fontWeight: 700,
+      fontSize: 20,
     },
   };
   return (
@@ -229,14 +235,26 @@ const Home = () => {
                   <Card.Body>
                     <Card.Title style={styles.title}>{camp.name}</Card.Title>
 
-                    <Card.Text>{camp.description}</Card.Text>
-                    <Card.Text>{camp.toilets}</Card.Text>
+                    <Card.Text style={styles.description}>
+                      {camp.description}
+                    </Card.Text>
+                    <Card.Text style={styles.description}>
+                      {camp.toilets}
+                    </Card.Text>
                     {camp.firewood ? (
-                      <Card.Text>Firewood on-site: {camp.firewood}</Card.Text>
+                      <Card.Text style={styles.description}>
+                        Firewood on-site: {camp.firewood}
+                      </Card.Text>
                     ) : null}
                     {camp.reservation ? (
                       <Button style={styles.button}>
                         <Link to={camp.reservation}>Reserve a site!</Link>
+                      </Button>
+                    ) : null}
+
+                    {!Auth.loggedIn() ? (
+                      <Button>
+                        <Link to="/signin">Login to save this Campground!</Link>
                       </Button>
                     ) : null}
 
