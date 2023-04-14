@@ -26,7 +26,7 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={styles.appBar} position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -34,7 +34,7 @@ export default function ButtonAppBar() {
             sx={{ mr: 2 }}
           >
             {/* <MenuIcon /> */}
-          </IconButton>
+          {/* </IconButton> */}
 
           <h1>
             <TbTent />
