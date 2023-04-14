@@ -42,7 +42,7 @@ const client = new ApolloClient({
 
 const styles = {
   body: {
-    backgroundImage: "linear-gradient(rgb(122, 196, 239),white",
+    backgroundImage: "linear-gradient(rgb(108,147,92),rgb(233, 230, 211)",
   },
 };
 
