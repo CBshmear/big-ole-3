@@ -23,9 +23,19 @@ const Home = () => {
     return () => saveCampIds(savedCampIds);
   });
 
-  const tester = async () => {
-    //randomize, may eventually become a search for all parks. in API call, it is limited to 20. will eventually be increased.
-    const response = await searchNationalParks();
+//state variable to initialize limit for all campgrounds API call
+const [selectedLimit, setSelectedLimit] = useState(20);
+
+//track selected limit for all campgrounds API call
+const handleLimitChange = (event) => {
+  setSelectedLimit(event.target.value);
+  console.log("limit option set to: " + event.target.value)
+
+};
+ 
+  const tester = async () => { //search all campgrounds API call
+    
+    const response = await searchNationalParks(selectedLimit);
 
     if (!response.ok) {
       throw new Error("something went wrong!");
@@ -120,6 +130,7 @@ const Home = () => {
       height: "30%",
       margin: 5,
       borderRadius: 10,
+      border: "solid 1px black",
     },
     card: {
       borderRadius: 10,
@@ -127,9 +138,7 @@ const Home = () => {
       background: "rgba(0,0,0,0.2)",
       backgroundImage: "url(",
     },
-    title: {
-      fontSize: "25px",
-    },
+
     button: {
       height: "fit-content",
       width: "fit-content",
@@ -140,6 +149,13 @@ const Home = () => {
     },
     select: {
       width: "fit-content",
+    },
+    description: {
+      fontWeight: 500,
+    },
+    title: {
+      fontWeight: 700,
+      fontSize: 20,
     },
   };
   return (
@@ -198,12 +214,28 @@ const Home = () => {
             Search
           </Button>
           <h3>Go Exploring!</h3>
+            <select
+            style={styles.select}
+              value={selectedLimit}
+              onChange={handleLimitChange}
+            >
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+            </select>
           <Button
             className={Button}
             style={styles.button}
             onClick={() => tester()}
           >
-            Randomize Campgrounds
+            Search for {selectedLimit} Campgrounds
           </Button>
         </div>
       </div>
@@ -229,14 +261,26 @@ const Home = () => {
                   <Card.Body>
                     <Card.Title style={styles.title}>{camp.name}</Card.Title>
 
-                    <Card.Text>{camp.description}</Card.Text>
-                    <Card.Text>{camp.toilets}</Card.Text>
+                    <Card.Text style={styles.description}>
+                      {camp.description}
+                    </Card.Text>
+                    <Card.Text style={styles.description}>
+                      {camp.toilets}
+                    </Card.Text>
                     {camp.firewood ? (
-                      <Card.Text>Firewood on-site: {camp.firewood}</Card.Text>
+                      <Card.Text style={styles.description}>
+                        Firewood on-site: {camp.firewood}
+                      </Card.Text>
                     ) : null}
                     {camp.reservation ? (
                       <Button style={styles.button}>
                         <Link to={camp.reservation}>Reserve a site!</Link>
+                      </Button>
+                    ) : null}
+
+                    {!Auth.loggedIn() ? (
+                      <Button>
+                        <Link to="/signin">Login to save this Campground!</Link>
                       </Button>
                     ) : null}
 

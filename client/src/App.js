@@ -9,7 +9,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { useContext } from "react";
-import SingleCampground from "./components/pages/SingleCampground";
+import Badjob from "./components/pages/Badjob";
 import Home from "./components/pages/Home";
 import SignUp from "./components/pages/Signup";
 import NotFound from "./components/pages/NotFound";
@@ -42,7 +42,7 @@ const client = new ApolloClient({
 
 const styles = {
   body: {
-    backgroundImage: "linear-gradient(rgb(122, 196, 239),white",
+    backgroundImage: "linear-gradient(rgb(108,147,92),rgb(233, 230, 211)",
   },
 };
 
@@ -61,6 +61,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/badjob" element={<Badjob />} />
             {/* <Route path="campground/:campid" element={<SingleCampground />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -2,3 +2,7 @@
   border: solid rgb(253, 3, 191) 1px !important;
   background-color: rgb(253, 3, 191);
 }
+.Nav {
+  font-size: 20px;
+  color: black !important;
+}

@@ -6,12 +6,18 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
+import { TbTent } from "react-icons/tb";
+import "./styles/Styles.css";
+
 //import MenuIcon from "@mui/icons-material/Menu";
 import Auth from "../utils/auth";
 const styles = {
   appBar: {
-    backgroundColor: "rgb(122, 196, 239)",
+    backgroundColor: "rgb(108,147,92)",
     color: "black",
+  },
+  text: {
+    color: "black !important",
   },
 };
 
@@ -20,7 +26,7 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={styles.appBar} position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -28,24 +34,37 @@ export default function ButtonAppBar() {
             sx={{ mr: 2 }}
           >
             {/* <MenuIcon /> */}
-          </IconButton>
+          {/* </IconButton> */}
+
+          <h1>
+            <TbTent />
+          </h1>
 
           <Button color="inherit">
-            <Link to="/">Home</Link>
+            <Link className="Nav" to="/">
+              Home
+            </Link>
           </Button>
 
           {Auth.loggedIn() ? (
             <>
               <Button color="inherit">
-                <Link to="/profile">Profile</Link>
+                <Link className="Nav" to="/profile">
+                  Profile
+                </Link>
               </Button>
               <Button onClick={Auth.logout} color="inherit">
-                <Link to="/"> Log-out </Link>
+                <Link className="Nav" to="/">
+                  {" "}
+                  Log-out{" "}
+                </Link>
               </Button>
             </>
           ) : (
             <Button color="inherit">
-              <Link to="/signin">Login</Link>
+              <Link className="Nav" to="/signin">
+                Login
+              </Link>
             </Button>
           )}
         </Toolbar>
