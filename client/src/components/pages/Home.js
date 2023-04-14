@@ -23,9 +23,19 @@ const Home = () => {
     return () => saveCampIds(savedCampIds);
   });
 
-  const tester = async () => {
-    //randomize, may eventually become a search for all parks. in API call, it is limited to 20. will eventually be increased.
-    const response = await searchNationalParks();
+//state variable to initialize limit for all campgrounds API call
+const [selectedLimit, setSelectedLimit] = useState(20);
+
+//track selected limit for all campgrounds API call
+const handleLimitChange = (event) => {
+  setSelectedLimit(event.target.value);
+  console.log("limit option set to: " + event.target.value)
+
+};
+ 
+  const tester = async () => { //search all campgrounds API call
+    
+    const response = await searchNationalParks(selectedLimit);
 
     if (!response.ok) {
       throw new Error("something went wrong!");
@@ -204,12 +214,28 @@ const Home = () => {
             Search
           </Button>
           <h3>Go Exploring!</h3>
+            <select
+            style={styles.select}
+              value={selectedLimit}
+              onChange={handleLimitChange}
+            >
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+            </select>
           <Button
             className={Button}
             style={styles.button}
             onClick={() => tester()}
           >
-            Randomize Campgrounds
+            Search for {selectedLimit} Campgrounds
           </Button>
         </div>
       </div>
