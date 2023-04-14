@@ -6,12 +6,11 @@ AS A USER who enjoys camping in our National Parks <br>
 I WANT to have an effective method to search/ view camp grounds by location and amenity <br>
 SO THAT I can plan my future camping excursions.
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+Being that we love the great out doors and camping we were looking for a way to help us plan future camping trips.  We were able to use the National Parks API to populate National Parks by state.  
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+Once the user has found parks they would like to visit/ make note of they are able to save them to their favorite Campground list.  This will allow for quick access when trying to figure out where they want to go next.  
+
+This app is going to save time by providing all the information in an easy to navigate and easy to save format.
 
 ## Table of Contents (Optional)
 
@@ -29,14 +28,14 @@ https://happy-camper12345.herokuapp.com/
 
 When you click on the link above you will be taken to our home page where you can see a list of National Parks and their descriptions.  
 
-Once there you have the ability to create a profile page and login.  Once logged in you can then search for and add National Parks to your Favorite list - you'll be able to use this list to help plan any future camping trips.  If you decide that this park isn't for you, you'll also have the ability to delete the park from your Favorite List.
-
 ## Usage
 Link to deployed application: https://happy-camper12345.herokuapp.com/ 
 
-Provide instructions and examples for use. Include screenshots as needed.
+Once you click on the link above you will be whisked away to our home page.  On the home page you have the ability to browse camp sites by state.  You also have the ability to click on the reservation button and it will take you to the reservation page for that park.  Once there you can book the dates that work for you.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
+If you are still in a research phase you have the ability to create a user/ login and save your parks to your favorite campground list - You can then look at the various amenities and choose your campgrounds for your ultimate trip.  If you decide that the campground you chose isn't for you, you have the ability to delete the campground from your favorite list and it will no longer be an option.
+
+Have fun exploring and Happy Camping!!!
 
 ![alt text](assets/images/screenshot.png)
 
