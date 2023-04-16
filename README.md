@@ -16,6 +16,7 @@ This app is going to save time by providing all the information in an easy to na
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Tech Used](#tech-used)
 - [Credits](#credits)
 - [License](#license)
 - [Questions](#questions)
@@ -37,11 +38,29 @@ If you are still in a research phase you have the ability to create a user/ logi
 
 Have fun exploring and Happy Camping!!!
 
-![alt text](assets/images/screenshot.png)
+![Home Page](./Assets/Home_Page.png)<br>
+![Home Page With Results](./Assets/Home_W_Search.png)<br>
+![Login Page](./Assets/Login.png)<br>
+![Profile Page](./Assets/Profile.png)
+
+## Tech-Used
+MongoDB<br>
+Express.JS<br>
+React<br>
+Node.JS<br>
+GraphQL<br>
+BCrypt<br>
+Mongoose<br>
+JsonWebToken<br>
+Apollo Client<br>
+Material UI<br>
+React-Bootstrap<br>
+
+
 
 ## Credits
 
-The wonderful TA - Jess Guico - https://github.com/jessicamcg <br>
+Our Amazing TA - Jess Guico - https://github.com/jessicamcg <br>
 Connor Beer - https://github.com/CBshmear <br>
 William Burton - https://github.com/wburnton <br>
 Colin Bradshaw - https://github.com/lilcguy <br>
@@ -76,6 +95,8 @@ SOFTWARE.
 ---
 
 ## Questions
-Please contact me with any further questions.
-My GitHub username is CBshmear, and here is the link to my account: https://github.com/CBshmear/ 
-My E-mail address is connorbeer13@gmail.com.
+Please contact us with any further questions.  You can reach us by using any of the GitHub links below:<br>
+Connor Beer - https://github.com/CBshmear <br>
+William Burton - https://github.com/wburnton <br>
+Colin Bradshaw - https://github.com/lilcguy <br>
+Sean McGuire - https://github.com/swmcguire
