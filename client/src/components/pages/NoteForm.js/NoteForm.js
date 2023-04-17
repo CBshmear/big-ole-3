@@ -1,43 +1,47 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
 
-import { ADD_NOTE } from '../../../utils/mutations';
-import { GET_ME } from '../../../utils/queries';
+import { ADD_NOTE } from "../../../utils/mutations";
+import { GET_ME } from "../../../utils/queries";
 
-import Auth from '../../../utils/auth';
+import Auth from "../../../utils/auth";
+const Styles = {
+  button: {
+    width: "fit-content",
+  },
+};
 
 const NoteForm = ({ userId, campgroundId }) => {
-  const [noteText, setNoteText] = useState('');
+  const [noteText, setNoteText] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addNote, { error }] = useMutation(ADD_NOTE , {
-    
-        refetchQueries: [{ query: GET_ME, variables: { id: userId } }],
-        onCompleted: () => {
-          // Reset the form and trigger a re-render
-          setNoteText('');
-        },  
+  const [addNote, { error }] = useMutation(ADD_NOTE, {
+    refetchQueries: [{ query: GET_ME, variables: { id: userId } }],
+    onCompleted: () => {
+      // Reset the form and trigger a re-render
+      setNoteText("");
+    },
   });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      console.log(noteText);  
+      console.log(noteText);
       console.log(campgroundId);
       const { data } = await addNote({
         variables: {
-          userId,  
+          userId,
           campgroundId,
           noteText,
           noteAuthor: Auth.getProfile().data.username,
         },
       });
-      console.log(data); 
-    //   console.log(noteAuthor); 
-      setNoteText('');
+      console.log(data);
+      //   console.log(noteAuthor);
+      setNoteText("");
     } catch (err) {
       console.error(err);
     }
@@ -46,10 +50,9 @@ const NoteForm = ({ userId, campgroundId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'noteText' && value.length <= 280) {
+    if (name === "noteText" && value.length <= 280) {
       setNoteText(value);
       setCharacterCount(value.length);
-      
     }
   };
 
@@ -61,7 +64,7 @@ const NoteForm = ({ userId, campgroundId }) => {
         <>
           <p
             className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
+              characterCount === 280 || error ? "text-danger" : ""
             }`}
           >
             Character Count: {characterCount}/280
@@ -77,13 +80,17 @@ const NoteForm = ({ userId, campgroundId }) => {
                 placeholder="Add your note..."
                 value={noteText}
                 className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
               ></textarea>
             </div>
 
             <div className="col-12 col-lg-3">
-              <button  className="btn btn-primary btn-block py-3" type="submit">
+              <button
+                style={Styles.button}
+                className="btn btn-primary btn-block py-3"
+                type="submit"
+              >
                 Add note
               </button>
             </div>
@@ -91,7 +98,7 @@ const NoteForm = ({ userId, campgroundId }) => {
         </>
       ) : (
         <p>
-          You need to be logged in to share your thoughts. Please{' '}
+          You need to be logged in to share your thoughts. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
