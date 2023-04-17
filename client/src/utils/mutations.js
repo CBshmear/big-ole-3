@@ -66,5 +66,41 @@ export const REMOVE_CAMPGROUND = gql`
         totalSites
       }
     }
+  } 
+
+
+`; 
+
+// export const ADD_FRIEND = gql `
+//   mutation Mutation($friends: ID!) {
+//     addFriend(friends: $friends) {
+//       _id
+//       email
+//       username
+//     }
+//   }
+
+// `; 
+
+// export const ADD_TRIP = gql ` 
+//   mutation Mutation($input: TripInput) {
+//   addTrip(input: $input) {
+//     id
+//     name
+//     campgrounds {
+//       campgroundId
+//       description
+//       name
+//       reservation
+//     }
+//   }
+// }
+// ` 
+
+export const ADD_NOTE = gql ` 
+ mutation Mutation($userId: ID!, $campgroundId: String!, $noteText: String!) {
+  addNote(userId: $userId, campgroundId: $campgroundId, noteText: $noteText) {
+    campgroundId   
   }
-`;
+}
+`

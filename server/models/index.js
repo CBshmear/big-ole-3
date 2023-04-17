@@ -1,4 +1,5 @@
 const User = require('./User');
-// const Campground = require('./Campground');
+// const Trip = require('./Trip');
+const { Campground } = require('./Campground');
 
-module.exports = { User };
+module.exports = { User, Campground };

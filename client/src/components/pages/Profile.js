@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
+import { Select } from 'react-select';
 import { Link } from "react-router-dom";
 import "../styles/Profile.css";
 import { GET_ME } from "../../utils/queries";
 import { REMOVE_CAMPGROUND } from "../../utils/mutations";
 import Auth from "../../utils/auth";
+import NoteForm from "./NoteForm.js/NoteForm";
+import NoteList from "./NoteList/NoteList";
 import { removeCampId } from "../../utils/localStorage";
+import { InputAdornment, TextField } from "@material-ui/core";
 
 const styles = {
   image: {
@@ -41,18 +45,22 @@ const styles = {
     justifyContent: "center",
   },
 };
-//wishlist:
-//user profile has a campground wishlist and a places i've been
-//as it stands now, in the model, it has a favCampgrounds property. we can change this later.
 
-//query me to get favCampgrounds
-//delete campground
+
+
 
 export default function Profile() {
+
+
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
-  console.log(userData);
+
+  // const { loading: usersLoading, data: usersData } = useQuery(FIND_FRIENDS);
+  // const friendsData = usersData?.users || {};
+
+  
   const [removeCampground] = useMutation(REMOVE_CAMPGROUND);
+  
 
   const handleDeleteCamp = async (campgroundId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -80,6 +88,7 @@ export default function Profile() {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+  
   return (
     <div>
       <h1 style={styles.body}>Hello, {userData.username}</h1>
@@ -116,6 +125,12 @@ export default function Profile() {
                   <Button onClick={() => handleDeleteCamp(camp.campgroundId)}>
                     Delete Campground
                   </Button>
+                  <div className="my-5">
+                    <NoteList notes={camp.note} />
+                  </div>
+                  <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+                    <NoteForm userId= {userData._id} campgroundId={camp.campgroundId} />
+                  </div>
                 </Card.Body>
               </Card>
             </Col>

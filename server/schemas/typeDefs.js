@@ -5,8 +5,10 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    favCampgrounds: [Campground]
-  }
+    favCampgrounds: [Campground]!
+    # friends: [User] 
+    # trips: [Trip]
+  } 
 
   type Campground {
     campgroundId: String
@@ -18,7 +20,8 @@ const typeDefs = gql`
     totalSites: Int
     toilets: String
     potableWater: String
-    firewood: String
+    firewood: String 
+    note: [Note]!
   }
 
   input CampgroundInput {
@@ -30,18 +33,51 @@ const typeDefs = gql`
     name: String!
     potableWater: String
     reservation: String
-    toilets: String
+    toilets: String 
+    note: [NoteInput]
+  } 
+
+  # type Trip { 
+  #   id: ID! 
+  #   name: String! 
+  #   # campgrounds: [Campground] 
+  # }  
+
+  type Note { 
+    _id: ID 
+    noteText: String! 
+    noteAuthor: String!
+    createdAt: String
+  }
+
+  # input TripInput { 
+  #   id: ID! 
+  #   name: String! 
+  #   # campgrounds: [CampgroundInput] 
+  # } 
+
+  input NoteInput { 
+    _id: ID 
+    noteText: String 
+    noteAuthor: String
+    createdAt: String
   }
 
   type Query {
-    me: User!
+    users: [User]
+    me: User! 
+    campgrounds(campgroundId: String!): Campground
+    camp: [Campground]
   }
 
   type Mutation {
     login(email: String, password: String): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     saveCampground(campgroundInput: CampgroundInput): User
-    removeCampground(campgroundId: ID!): User
+    removeCampground(campgroundId: ID!): User 
+    # addFriend(friends: ID!): User 
+    # addTrip(input: TripInput): Trip 
+    addNote(userId: ID!, campgroundId: String!, noteText: String!): Campground!
   }
 
   type Auth {

@@ -23,6 +23,7 @@
     "@mui/material": "^5.11.16",
     "react-bootstrap": "^2.7.2",
     "react-icons": "^4.8.0",
-    "react-scroll-to-top": "^3.0.0"
+    "react-scroll-to-top": "^3.0.0",
+    "react-select": "^5.7.2"
   }
 }
