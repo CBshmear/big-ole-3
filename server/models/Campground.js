@@ -1,8 +1,11 @@
 const { Schema, model } = require("mongoose");
+const dateFormat = require('../utils/dateFormat');
 
 const campgroundSchema = new Schema({
   campgroundId: {
-    type: String,
+    type: String, 
+    unique: true, 
+
   },
   name: {
     type: String,
@@ -34,9 +37,29 @@ const campgroundSchema = new Schema({
   },
   firewood: {
     type: String,
-  },
+  }, 
+  note: [ 
+    { 
+      noteText: { 
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
+      }, 
+      noteAuthor: {
+        type: String, 
+        required: true,
+      },
+      createdAt: { 
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      }
+    }
+  ]
 });
 
-//const Campground = model('Campground', campgroundSchema);
+const Campground = model('Campground', campgroundSchema);
 
-module.exports = campgroundSchema;
+ 
+module.exports = { Campground, campgroundSchema };

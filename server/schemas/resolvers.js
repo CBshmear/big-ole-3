@@ -1,15 +1,24 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Trip, Campground } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
-  Query: {
+  Query: { 
+    users: async () => { 
+      return User.find();
+    },
     me: async (parent, args, context) => {
       console.log("context", context.user);
       if (context.user) {
         return await User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError("You need to be logged in!");
+    }, 
+    campgrounds: async (parent, { campgroundId }) => { 
+      return Campground.findOne( { campgroundId: campgroundId });
+    }, 
+    camp: async () => { 
+      return Campground.find();
     },
   },
   Mutation: {
@@ -70,8 +79,56 @@ const resolvers = {
         );
         return updatedUser;
       }
-    },
+    }, 
+
+    // addFriend: async (parent, args, context) => { 
+    //   if (context.user) { 
+    //     const newFriend = await User.findOneAndUpdate(
+    //       { _id: context.user._id}, 
+    //       { $addToSet: { friends: args._id} }, 
+    //       { new: true }
+
+    //     ); 
+    //     return newFriend;
+    //   }
+    // }, 
+
+    // addTrip: async (parent, { name, campgrounds }, context) => { 
+    //   const trip = new Trip({ name, campgrounds }); 
+    //   await trip.create(); 
+    //   return trip;
+    // }, 
+    addNote: async (parent, { userId, campgroundId, noteText }, context) => {
+      if (context.user) {
+        const userDoc = context.user;
+          const updatedUser = await User.findOneAndUpdate(
+            {
+              _id: userId,
+              'favCampgrounds.campgroundId': campgroundId
+            },
+            {
+              $addToSet: {
+                'favCampgrounds.$.note': {
+                  noteText,
+                  noteAuthor: context.user.username
+                }
+              }
+            },
+            {
+              new: true,
+              runValidators: true
+            }
+          );
+    
+          return updatedUser;
+       
+    } 
   },
+} 
 };
+    
+      
+      
+
 
 module.exports = resolvers;

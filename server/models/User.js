@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 
 const { Schema, model } = require("mongoose");
 
-const campgroundSchema = require("./Campground");
+const { campgroundSchema } = require("./Campground"); 
+const tripSchema = require("./Trip");
 
 const userSchema = new Schema(
   {
@@ -24,7 +25,14 @@ const userSchema = new Schema(
       required: true,
     },
 
-    favCampgrounds: [campgroundSchema],
+    favCampgrounds: [campgroundSchema], 
+
+    // friends: [{ 
+    //   type: Schema.Types.ObjectId, 
+    //   ref: 'User',
+    // },],
+
+    // trips: [tripSchema],
   },
   {
     toJSON: {
