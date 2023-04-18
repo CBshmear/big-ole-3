@@ -62,7 +62,7 @@ React-Bootstrap<br>
 
 Our Amazing TA - Jess Guico - https://github.com/jessicamcg <br>
 Connor Beer - https://github.com/CBshmear <br>
-William Burton - https://github.com/wburnton <br>
+William Burnton - https://github.com/wburnton <br>
 Colin Bradshaw - https://github.com/lilcguy <br>
 Sean McGuire - https://github.com/swmcguire 
 
@@ -97,6 +97,6 @@ SOFTWARE.
 ## Questions
 Please contact us with any further questions.  You can reach us by using any of the GitHub links below:<br>
 Connor Beer - https://github.com/CBshmear <br>
-William Burton - https://github.com/wburnton <br>
+William Burnton - https://github.com/wburnton <br>
 Colin Bradshaw - https://github.com/lilcguy <br>
 Sean McGuire - https://github.com/swmcguire
